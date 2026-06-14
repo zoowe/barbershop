@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Blade — Премиум барбершоп</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,15,15,0.92); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo { font-size: 18px; font-weight: 600; color: #c9a96e; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 13px; color: #aaa; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: #c9a96e; color: #111; border: none;
+      padding: 8px 20px; border-radius: 4px; font-size: 13px; font-weight: 500; cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; background: #111;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 40px 80px;
+    }
+    .hero-badge {
+      display: inline-block; font-size: 10px; letter-spacing: 3px; color: #c9a96e;
+      border: 0.5px solid #c9a96e; padding: 5px 16px; border-radius: 20px;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero h1 { font-size: 56px; font-weight: 600; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { color: #c9a96e; }
+    .hero p { font-size: 16px; color: #888; max-width: 480px; line-height: 1.7; margin-bottom: 36px; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: #c9a96e; color: #111; border: none;
+      padding: 14px 36px; border-radius: 4px; font-size: 14px; font-weight: 500; cursor: pointer;
+      transition: opacity .2s;
+    }
+    .btn-gold:hover { opacity: 0.88; }
+    .btn-outline {
+      background: transparent; color: #fff;
+      border: 0.5px solid #444; padding: 14px 36px; border-radius: 4px;
+      font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block; line-height: 1;
+      transition: border-color .2s;
+    }
+    .btn-outline:hover { border-color: #888; }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: #1a1a1a; border-top: 0.5px solid #222; border-bottom: 0.5px solid #222;
+      display: flex; justify-content: center; gap: 0;
+    }
+    .stat { padding: 28px 48px; text-align: center; border-right: 0.5px solid #2a2a2a; }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-size: 28px; font-weight: 600; color: #c9a96e; }
+    .stat-label { font-size: 11px; color: #666; margin-top: 2px; letter-spacing: 0.5px; }
+
+    /* SECTIONS */
+    section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; }
+    .section-eyebrow { font-size: 10px; letter-spacing: 3px; color: #c9a96e; text-transform: uppercase; margin-bottom: 8px; }
+    .section-title { font-size: 30px; font-weight: 600; color: #111; margin-bottom: 40px; }
+
+    /* SERVICES */
+    #services { border-bottom: 0.5px solid #eee; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: #eee; border: 0.5px solid #eee; border-radius: 12px; overflow: hidden; }
+    .service-card { background: #fff; padding: 28px 24px; }
+    .service-icon { font-size: 28px; margin-bottom: 14px; }
+    .service-name { font-size: 16px; font-weight: 600; color: #111; margin-bottom: 6px; }
+    .service-desc { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 16px; }
+    .service-price { font-size: 20px; font-weight: 600; color: #c9a96e; }
+
+    /* MASTERS */
+    #masters { background: #fafafa; max-width: 100%; padding: 80px 40px; }
+    .masters-inner { max-width: 1000px; margin: 0 auto; }
+    .masters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .master-card {
+      background: #fff; border: 0.5px solid #e8e8e8; border-radius: 12px;
+      padding: 28px 20px; text-align: center;
+    }
+    .master-avatar {
+      width: 72px; height: 72px; border-radius: 50%; background: #111;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px; font-size: 20px; font-weight: 600; color: #c9a96e;
+    }
+    .master-name { font-size: 16px; font-weight: 600; color: #111; }
+    .master-role { font-size: 12px; color: #888; margin-top: 3px; margin-bottom: 8px; }
+    .master-exp { font-size: 12px; color: #c9a96e; font-weight: 500; }
+
+    /* REVIEWS */
+    #reviews { border-bottom: 0.5px solid #eee; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .review-card { background: #fff; border: 0.5px solid #e8e8e8; border-radius: 12px; padding: 24px; }
+    .stars { color: #c9a96e; font-size: 14px; margin-bottom: 10px; }
+    .review-text { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 14px; font-style: italic; }
+    .review-author { font-size: 13px; font-weight: 600; color: #111; }
+
+    /* CTA */
+    .cta-section {
+      background: #111; padding: 80px 40px; text-align: center;
+    }
+    .cta-section h2 { font-size: 34px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+    .cta-section p { font-size: 15px; color: #888; margin-bottom: 32px; }
+    .contacts {
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 48px;
+      border-top: 0.5px solid #2a2a2a; padding-top: 40px;
+    }
+    .contact-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #888; }
+    .contact-icon { font-size: 18px; }
+
+    /* FOOTER */
+    footer {
+      background: #0a0a0a; text-align: center; padding: 20px 40px;
+      font-size: 12px; color: #444; border-top: 0.5px solid #1a1a1a;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 36px; }
+      section { padding: 60px 20px; }
+      .stats-bar { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 0.5px solid #2a2a2a; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">BLACK BLADE</div>
+  <div class="nav-links">
+    <a href="#services">Услуги</a>
+    <a href="#masters">Мастера</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#contact">Контакты</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Записаться</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Премиум барбершоп · Москва</div>
+  <h1>Твой стиль —<br>наша <span>работа</span></h1>
+  <p>Классические стрижки, современные техники и идеальное бритьё в атмосфере настоящего мужского клуба</p>
+  <div class="hero-btns">
+    <button class="btn-gold" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Записаться онлайн</button>
+    <a href="#services" class="btn-outline">Наши услуги</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">3 000+</div><div class="stat-label">Довольных клиентов</div></div>
+  <div class="stat"><div class="stat-num">8 лет</div><div class="stat-label">На рынке</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Опытных мастера</div></div>
+  <div class="stat"><div class="stat-num">4.9 ★</div><div class="stat-label">Средний рейтинг</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-eyebrow">Что мы делаем</div>
+  <div class="section-title">Услуги</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <div class="service-name">Стрижка</div>
+      <div class="service-desc">Классика, фейд, андеркат — любой стиль под твою форму лица</div>
+      <div class="service-price">от 800 ₽</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧔</div>
+      <div class="service-name">Борода</div>
+      <div class="service-desc">Оформление, моделирование и уход за бородой любой длины</div>
+      <div class="service-price">от 600 ₽</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💈</div>
+      <div class="service-name">Комплекс</div>
+      <div class="service-desc">Стрижка + борода + укладка — полный образ за один визит</div>
+      <div class="service-price">от 1 300 ₽</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <div class="service-name">Уход</div>
+      <div class="service-desc">Маски, скрабы, питание кожи головы и восстановление волос</div>
+      <div class="service-price">от 500 ₽</div>
+    </div>
+  </div>
+</section>
+
+<!-- MASTERS -->
+<div id="masters">
+  <div class="masters-inner">
+    <div class="section-eyebrow">Наша команда</div>
+    <div class="section-title">Мастера</div>
+    <div class="masters-grid">
+      <div class="master-card">
+        <div class="master-avatar">АК</div>
+        <div class="master-name">Алексей Краснов</div>
+        <div class="master-role">Топ-барбер</div>
+        <div class="master-exp">8 лет опыта</div>
+      </div>
+      <div class="master-card">
+        <div class="master-avatar">ДМ</div>
+        <div class="master-name">Дмитрий Михайлов</div>
+        <div class="master-role">Барбер</div>
+        <div class="master-exp">5 лет опыта</div>
+      </div>
+      <div class="master-card">
+        <div class="master-avatar">ИС</div>
+        <div class="master-name">Иван Соловьёв</div>
+        <div class="master-role">Барбер</div>
+        <div class="master-exp">3 года опыта</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-eyebrow">Что говорят клиенты</div>
+  <div class="section-title">Отзывы</div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="review-text">«Хожу сюда уже год. Алексей всегда знает, чего я хочу — даже лучше, чем я сам объясняю.»</div>
+      <div class="review-author">Максим, 28 лет</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="review-text">«Атмосфера классная, кофе вкусный, стрижка идеальная. Лучший барбершоп в городе без вариантов.»</div>
+      <div class="review-author">Артём, 34 года</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★☆</div>
+      <div class="review-text">«Брал комплекс — стрижка + борода. Результат отличный, вышел как будто помолодел лет на пять.»</div>
+      <div class="review-author">Сергей, 41 год</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + CONTACT -->
+<div class="cta-section" id="contact">
+  <h2>Готов к новому образу?</h2>
+  <p>Запись онлайн — выбери удобное время за 2 минуты</p>
+  <button class="btn-gold" style="font-size:15px; padding:16px 40px;">Записаться сейчас</button>
+  <div class="contacts">
+    <div class="contact-item"><span class="contact-icon">📍</span> ул. Пушкина, 12, Москва</div>
+    <div class="contact-item"><span class="contact-icon">📞</span> +7 (999) 123-45-67</div>
+    <div class="contact-item"><span class="contact-icon">🕐</span> Пн–Вс, 10:00–21:00</div>
+    <div class="contact-item"><span class="contact-icon">📱</span> @blackblade_barber</div>
+  </div>
+</div>
+
+<footer>
+  © 2024 Black Blade Barbershop — Все права защищены
+</footer>
+
+</body>
+</html>
